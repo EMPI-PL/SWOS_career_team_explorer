@@ -1,6 +1,6 @@
 # This file will contain any pieces of code that may be needed in terms of "fixing" some readings from the CAR file.
 
-from di import d_posfaceval
+from dict import d_posfaceval
 
 def fixposition(decin):
     # Fixes some issues with wrong hex numbering for players under CAR file

@@ -22,5 +22,10 @@ def hexcutzeros(hexdata):
 
 def hex2ascii(hexdata, code='utf-8'):
     # Converts hex data into ascii
-    tmpdata = bytes.fromhex(hexdata).decode(code)
+    tmpdata = bytes.fromhex(hexdata).decode(code)    
+    return tmpdata
+
+def hex2int(hexdata):
+    # Converts hex data to decimal
+    tmpdata = int(hexdata, 16)
     return tmpdata
