@@ -2,7 +2,7 @@
 from fixes import *
 from dict import *
 from func import *
-import binascii, argparse
+import binascii, argparse, subprocess
 
 # Define classes for teams and players
 class carteam():
