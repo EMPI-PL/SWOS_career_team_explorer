@@ -7,44 +7,44 @@ d_posfaceval = {
     #bface	10 	30 	50 	70 	90 	B0 	D0 	F0
 
     #Goalkepers
-    0:("G","n", "img/d_face.gif"),
-    8:("G","l", "img/l_face.gif"),
-    16:("G","b", "img/b_face.gif"),
+    0:("G","n", "img/d_face.png"),
+    8:("G","l", "img/l_face.png"),
+    16:("G","b", "img/b_face.png"),
 
     #Rightbacks
-    32:("RB","n", "img/d_face.gif"),
-    40:("RB","l", "img/l_face.gif"),
-    48:("RB","b", "img/b_face.gif"),
+    32:("RB","n", "img/d_face.png"),
+    40:("RB","l", "img/l_face.png"),
+    48:("RB","b", "img/b_face.png"),
 
     #Leftbacks
-    64:("LB","n", "img/d_face.gif"),
-    72:("LB","l", "img/l_face.gif"),
-    80:("LB","b", "img/b_face.gif"),
+    64:("LB","n", "img/d_face.png"),
+    72:("LB","l", "img/l_face.png"),
+    80:("LB","b", "img/b_face.png"),
 
     #Defenders
-    96:("D","n", "img/d_face.gif"),
-    104:("D","l", "img/l_face.gif"),
-    112:("D","b", "img/b_face.gif"),
+    96:("D","n", "img/d_face.png"),
+    104:("D","l", "img/l_face.png"),
+    112:("D","b", "img/b_face.png"),
 
     #Rightwings
-    128:("RW","n", "img/d_face.gif"),
-    136:("RW","l", "img/l_face.gif"),
-    144:("RW","b", "img/b_face.gif"),
+    128:("RW","n", "img/d_face.png"),
+    136:("RW","l", "img/l_face.png"),
+    144:("RW","b", "img/b_face.png"),
 
     #Leftwings
-    160:("LW","n", "img/d_face.gif"),
-    168:("LW","l", "img/l_face.gif"),
-    176:("LW","b", "img/b_face.gif"),
+    160:("LW","n", "img/d_face.png"),
+    168:("LW","l", "img/l_face.png"),
+    176:("LW","b", "img/b_face.png"),
 
     #Midfielders
-    192:("M","n", "img/d_face.gif"),
-    200:("M","l", "img/l_face.gif"),
-    208:("M","b", "img/b_face.gif"),
+    192:("M","n", "img/d_face.png"),
+    200:("M","l", "img/l_face.png"),
+    208:("M","b", "img/b_face.png"),
 
     #Attackers
-    224:("A","n", "img/d_face.gif"),
-    232:("A","l", "img/l_face.gif"),
-    240:("A","b", "img/b_face.gif")
+    224:("A","n", "img/d_face.png"),
+    232:("A","l", "img/l_face.png"),
+    240:("A","b", "img/b_face.png")
 }
 
 d_HEX_nation = {
@@ -65,6 +65,14 @@ d_HEX_nation = {
     '0x82':(130,'059'),'0x83':(131,'?'),'0x84':(132,'?'),'0x85':(133,'?'),'0x86':(134,'?'),'0x87':(135,'?'),'0x88':(136,'?'),'0x89':(137,'?'),'0x8a':(138,'?'),'0x8b':(139,'?'),
     '0x8c':(140,'?'),'0x8d':(141,'?'),'0x8e':(142,'?'),'0x8f':(143,'?'),'0x90':(144,'?'),'0x91':(145,'?'),'0x92':(146,'?'),'0x93':(147,'?'),'0x94':(148,'044'),'0x95':(149,'062'),
     '0x96':(150,'?'),'0x97':(151,'?'),'0x98':(152,'072')
+}
+
+d_HEX_callplayer = {
+    # HEX VALUE; HEX ADDRESS
+    '00': 0xDBCC,    '01': 0xDBF2,    '02': 0xDC18,    '03': 0xDC3E,    '04': 0xDC64,    '05': 0xDC8A,    '06': 0xDCB0,    '07': 0xDCD6,    '08': 0xDCFC,
+    '09': 0xDD22,    '0a': 0xDD48,    '0b': 0xDD6E,    '0c': 0xDD94,    '0d': 0xDDBA,    '0e': 0xDDE0,    '0f': 0xDE06,    '10': 0xDE2C,    '11': 0xDE52,
+    '12': 0xDE78,    '13': 0xDE9E,    '14': 0xDEC4,    '15': 0xDEEA,    '16': 0xDF10,    '17': 0xDF36,    '18': 0xDF5C,    '19': 0xDF82,    '1a': 0xDFA8,
+    '1b': 0xDFCE,    '1c': 0xDFF4,    '1d': 0xE01A,    'ff': 0x0000
 }
 
 d_AGEdit_nation = {
