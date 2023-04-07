@@ -10,8 +10,9 @@ This tool may have some bugs. Any feedback is always appreciated.
 
 ### Requirements
 
-* Python >3.10
-* Additional Python's libs: tkinter, pillow (PIL) 
+* Python >=3.9
+* Additional Python's libs: tkinter, pillow (PIL)
+* *swos.ttf* font installed 
 
 ### Running
 

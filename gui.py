@@ -1,5 +1,6 @@
 import tkinter as tk
 import webbrowser
+import os
 from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import filedialog
@@ -10,7 +11,7 @@ from dict import *
 windowH = 900       # window height
 windowW = 1000      # window width
 fontW = 'swos'      # Right now assume font installed in system so just name it
-version = 'version 0.3'
+version = 'version 0.31'
 title = 'SWOS Career Team Explorer'
 url = 'https://github.com/EMPI-PL/SWOS_career_team_explorer'
 colortone = '#000040'
@@ -19,6 +20,7 @@ color_gk = "#248900"
 color_pl = '#2075ee'
 color_16 = '#143f7e'
 color_re = '#ae131a'
+pythonpath = os.path.dirname(__file__)+'/'
 
 class openfiledialog():
     def __init__(self, initialdir, title, filetype):
@@ -31,7 +33,7 @@ class openfiledialog():
         return x
 
 def opencar():    
-    choosecarfile = openfiledialog('/home/','Select SWOS career file',[('SWOS Career file', '*.CAR')])
+    choosecarfile = openfiledialog(pythonpath,'Select SWOS career file',[('SWOS Career file', '*.CAR')])
     pickedfile = choosecarfile.show()
     carfile_output = readcarfile(pickedfile)  # Call func to read squad details
     updateview(carfile_output)   # Call func to view data
@@ -43,9 +45,9 @@ def updateview(carfile_output):
     squadcanvas.place(x=10,y=10)
     counter = 1    
     while counter < len(squad):
-        pic_load = Image.open(squad[counter][0])    # Read a "head picture"
+        pic_load = Image.open(pythonpath+squad[counter][0])    # Read a "head picture"
         pic_set = ImageTk.PhotoImage(pic_load)
-        star_load = Image.open(d_stars[squad[counter][12]])
+        star_load = Image.open(pythonpath+d_stars[squad[counter][12]])
         star_set = ImageTk.PhotoImage(star_load)
         head_label = Label(squadcanvas,image=pic_set,bg=color_pl,bd=0)
         head_label.image = pic_set
@@ -145,12 +147,12 @@ root.resizable(0,0) # Make the frame not resizable
 root.geometry(str(windowW)+'x'+str(windowH))
 
 # Define buttons/images used in app's window
-b1 = PhotoImage(file='img/button_quit.png')             # Quit menu button
-b2 = PhotoImage(file='img/button_opencar.png')          # Open *.CAR file menu button
-img1 = PhotoImage(file='res/sensi_logo_small.png')      # Left-upper corner logo
-bg = PhotoImage(file='img/bgswos_700x850.png')          # Left's side background
-info = PhotoImage(file='img/button_info.png')           # Open info
-git = PhotoImage(file='img/button_git.png')             # Open GitHUB
+b1 = PhotoImage(file=pythonpath+'img/button_quit.png')             # Quit menu button
+b2 = PhotoImage(file=pythonpath+'img/button_opencar.png')          # Open *.CAR file menu button
+img1 = PhotoImage(file=pythonpath+'res/sensi_logo_small.png')      # Left-upper corner logo
+bg = PhotoImage(file=pythonpath+'img/bgswos_700x850.png')          # Left's side background
+info = PhotoImage(file=pythonpath+'img/button_info.png')           # Open info
+git = PhotoImage(file=pythonpath+'img/button_git.png')             # Open GitHUB
 
 # Upper frame section (title)
 #- - - - - - - - - - - - - - - - -
