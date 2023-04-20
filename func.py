@@ -29,3 +29,19 @@ def hex2int(hexdata):
     # Converts hex data to decimal
     tmpdata = int(hexdata, 16)
     return tmpdata
+
+def clear_4_XML(input_value):
+    # In order to avoid not-well formatted issue, any special chars must be removed
+    # TAG names cannot start with numbers, "xml" in any shape and/or form and also cannot contain spaces
+    tmpdata = hex2ascii(input_value)        # Converts data to readable format
+    tmpdata = tmpdata.replace('. ', '_')    # Takes out any dot+whitespace by repleacing with _
+    tmpdata = tmpdata.replace(' ', '_')     # Takes out any remaining whitespaces by repleacing with _    
+    tmpdata = tmpdata.replace("'", "")      # Takes out any ' sign
+    tmpdata = tmpdata.replace("/", "")      # Takes out any / sign    
+    # Add _ if starts with number
+    try:
+        int(tmpdata[0])
+        tmpdata = '_'+tmpdata
+    except:
+        pass    # Literally DO NOTHING bro :-)
+    return tmpdata

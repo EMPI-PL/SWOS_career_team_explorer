@@ -1,4 +1,4 @@
-# Sensible Soccer career team browser
+# Sensible Soccer career team explorer
 
 ![picture](README_pic.png)
 
@@ -10,16 +10,17 @@ This tool may have some bugs. Any feedback is always appreciated.
 
 ### Requirements
 
-* Python >=3.9
-* Additional Python's libs: tkinter, pillow (PIL)
-* *swos.ttf* font installed 
+* Python >=3.10
+* Additional Python's libs: tk (tkinter), pillow (PIL), xml.dom (minidom)
+  If you miss any Python libs please use *pip install*
+* *swos.ttf* font installed (otherwise it'll display other font) 
 
 ### Running
 
 Just type in console (or from command line):
 
 ```
-python gui.py
+python CARexplorer.py
 ```
 
-If your system is configured the proper way you may also want to double click on *gui.py* to execute the app.
+If your system is configured the proper way you may also want to double click on *CARexplorer.py* to execute the app.
