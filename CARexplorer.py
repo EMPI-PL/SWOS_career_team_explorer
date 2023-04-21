@@ -244,7 +244,7 @@ b5 = PhotoImage(file=pythonpath+'img/button_edt_plr.png')          # Edit player
 b6 = PhotoImage(file=pythonpath+'img/button_add_plr.png')          # Add player
 b7 = PhotoImage(file=pythonpath+'img/button_gen_job.png')          # Generate job offer
 img1 = PhotoImage(file=pythonpath+'res/sensi_logo_small.png')      # Left-upper corner logo
-bg = PhotoImage(file=pythonpath+'img/bgswos_700x850.png')          # Left's side background
+bg = PhotoImage(file=pythonpath+'img/bgswos.png')                  # Left's side background
 info = PhotoImage(file=pythonpath+'img/button_info.png')           # Open info
 git = PhotoImage(file=pythonpath+'img/button_git.png')             # Open GitHUB
 

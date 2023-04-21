@@ -5,9 +5,7 @@ from dict import *
 from func import *
 
 def update_teamdata(datadirpath, outputdatapath, pattern='TEAM.0*'):
-    # change in future to get config inputs
     directory_path = datadirpath
-    ####### pattern = 'TEAM.0*'
     hexoffset = 684                 # Each team has 684 bytes of data in TEAM.xxx file
 
     # Build a root of XML and info TAG
@@ -24,7 +22,7 @@ def update_teamdata(datadirpath, outputdatapath, pattern='TEAM.0*'):
         TEAMxxx_filesize = os.path.getsize(TEAMxxx_file)-1
         TEAMxxx_inputfile = open(TEAMxxx_file, 'r+b').read()
         
-        # Declare TAG for current file as follows <TEAM.xxx country=xxx career_playable=True/>
+        # Declare TAG for current file as follows <TEAM.xxx country=xxx region=xxx career_playable=True/False>
         el_2 = XML_outputfile.createElement(os.path.basename(TEAMxxx_file))
         el_2.setAttribute('country_name', d_teamfile[os.path.basename(TEAMxxx_file)][0])
         el_2.setAttribute('region', d_teamfile[os.path.basename(TEAMxxx_file)][1])

@@ -11,9 +11,9 @@ This tool may have some bugs. Any feedback is always appreciated.
 ### Requirements
 
 * Python >=3.10
-* Additional Python's libs: tk (tkinter), pillow (PIL), xml.dom (minidom)
-  If you miss any Python libs please use *pip install*
-* *swos.ttf* font installed (otherwise it'll display other font) 
+* Additional Python's libs: **tk** (tkinter) and **ImageTk** (may be a separate package), **pillow** (PIL), **xml.dom** (minidom)  
+  If you miss any Python libs please use your repo or *pip install* or if you're on Windows you probably need to handle this via web browser and install manually.
+* *swos.ttf* font installed (otherwise it'll display other font)
 
 ### Running
 
