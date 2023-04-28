@@ -9,8 +9,8 @@
 #### Other
 * [NEW] New buttons and options added to GUI  
   Currently mostly inactive due to work in progress
-* [FIX] Opening another file will displays wrong info or leaves previously loaded data [#1](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/3)
-* [FIX] Wrong names displayed on occasion [#2](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/3)
+* [FIX] Opening another file will displays wrong info or leaves previously loaded data [#1](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/1)
+* [FIX] Wrong names displayed on occasion [#2](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/2)
 * [FIX] Corrected minimal requirements for Python (must be >=3.10)
 * Changed name of launch file from *gui.py* to ***CARexplorer.py***
 * Changed window size to include player's skills

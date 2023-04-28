@@ -18,6 +18,7 @@ This tool may have some bugs. Any feedback is always appreciated.
 ### Running
 
 Please make sure you've got your paths setup correctly under *CARexplorer.conf* file. Make sure you use **absolute paths**.
+
 Once this is done just type in console (or from command line):
 
 ```
