@@ -30,8 +30,8 @@ def update_teamdata(datadirpath, outputdatapath, pattern='TEAM.0*'):
         root.appendChild(el_2)
         
         while hexstart <= TEAMxxx_filesize:
-            el_3 = XML_outputfile.createElement(clear_4_XML(hexcutzeros(hexpure(hexread(TEAMxxx_inputfile,hexstart+0x5,16)))))
-            el_3.setAttribute('club_name', hex2ascii(hexcutzeros(hexpure(hexread(TEAMxxx_inputfile,hexstart+0x5,16)))))
+            el_3 = XML_outputfile.createElement(clear_4_XML(hexpurgezeros(hexpure(hexread(TEAMxxx_inputfile,hexstart+0x5,16)))))
+            el_3.setAttribute('club_name', hex2ascii(hexpurgezeros(hexpure(hexread(TEAMxxx_inputfile,hexstart+0x5,16)))))
             el_3.setAttribute('hex_general_number', hexpure(hexread(TEAMxxx_inputfile,hexstart+0x2,2)))
             el_3.setAttribute('country_number', hexpure(hexread(TEAMxxx_inputfile,hexstart,1)))
             el_3.setAttribute('countryteam_number', hexpure(hexread(TEAMxxx_inputfile,hexstart+0x1,1)))

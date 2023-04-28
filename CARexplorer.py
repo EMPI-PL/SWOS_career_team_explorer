@@ -160,8 +160,8 @@ def updateview(carfile_output):
     teamnamebox_5 = Label(teamcanvas,bg=colortone,width=15,height=1,bd=0,highlightthickness=0, font=('swos',14),anchor='w',text='BANK BALLANCE:',fg='yellow')
     teamnamebox_5.grid(row=6,column=0,columnspan=2)
     teamnamebox_6 = Label(teamcanvas,bg=colortone,width=20,height=1,bd=0,highlightthickness=0, font=('swos',10),anchor='e',text="{:0,.2f}".format(float(carfileteaminfo.money)),fg='white')
-    teamnamebox_6.grid(row=7,column=1,columnspan=2,pady=5)    
-  
+    teamnamebox_6.grid(row=7,column=1,columnspan=2,pady=5)
+
 def close():
     quit()
 

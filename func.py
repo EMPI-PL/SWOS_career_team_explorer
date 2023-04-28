@@ -14,12 +14,18 @@ def hexpure(hexextract):
     tmpdata = tmpdata.replace("'", '')
     return tmpdata
 
-def hexcutzeros(hexdata):
-    # Cuts zeros out of purified hex data
+def hexpurgezeros(hexdata):
+    # Purge zeros out of purified hex data
     # NOTE: This will delete double zeros no matter where they are
     tmpdata = hexdata.replace("00", "")
     return tmpdata
 
+def hexcutzeros(hexdata):
+    # Cut off entire string post initial 00 position
+    # NOTE: This will avoid misspelled names in squad
+    tmpdata = hexdata[:hexdata.index('00')]    
+    return tmpdata
+    
 def hex2ascii(hexdata, code='utf-8'):
     # Converts hex data into ascii
     tmpdata = bytes.fromhex(hexdata).decode(code)    
