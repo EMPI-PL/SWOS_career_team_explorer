@@ -1,5 +1,15 @@
 # Changelog
 
+### ver 0.41
+#### Highlights
+* :star2: [NEW] Added ability to change bank balance [#6](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/6)
+
+#### Other
+* [FIX] Spelling error in main screen [#13](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/13) (@Jezza53)
+* other minor changes and optimizations
+
+---
+
 ### ver 0.40
 #### Highlights
 * :star2: [NEW] Player's individual skills are now displayed [#3](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/3)
