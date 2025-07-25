@@ -12,11 +12,12 @@ from get_data import *
 windowH = 900       # window height
 windowW = 1300      # window width
 fontW = 'swos'      # Right now assume font installed in system so just name it
-version = 'version 0.40'
+version = 'version 0.41'
 title = 'SWOS Career Team Explorer'
 url = 'https://github.com/EMPI-PL/SWOS_career_team_explorer'
 colortone = '#000040'
 colortone_info = '#a90000'
+colortone_bbalance = colortone
 color_gk = "#248900"
 color_pl = '#2075ee'
 color_16 = '#143f7e'
@@ -24,6 +25,7 @@ color_re = '#ae131a'
 fcolor_headers = '#979A9A'
 pythonpath = os.path.dirname(__file__)+'/'
 configfile = pythonpath + 'CARexplorer.conf'
+pickedfile = 'none'
 
 class openfiledialog():
     def __init__(self, initialdir, title, filetype):
@@ -36,6 +38,8 @@ class openfiledialog():
         return x
 
 def opencar():
+    global carfile_output
+    global pickedfile
     clear_frame(mf_leftframe)    
     choosecarfile = openfiledialog(default_opendir,'Select SWOS career file',[('SWOS Career file', '*.CAR')])
     pickedfile = choosecarfile.show()
@@ -47,6 +51,7 @@ def clear_frame(framename):
         widgets.destroy()
 
 def updateview(carfile_output):
+    global carfileteaminfo
     squad = carfile_output[0]
     carfileteaminfo = carfile_output[1]
     squadcanvas = Canvas(mf_leftframe,width=680,borderwidth=0, highlightthickness=0,bg=colortone)
@@ -175,8 +180,63 @@ def upd_data_teams():
 def upd_data_players():     # This feature is planned for future releases
     pass
 
-def change_bbalance():      # This feature is planned for future releases
-    pass
+
+# Change Bank Balance section
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- 
+def change_bbalance():
+    global bbal_Box2, bbal
+    global ba_ofst
+    ba_ofst = 0xD5DC    # Once again set Bank Balance offset as stated in carread.py
+    if pickedfile != 'none':    # CAR file must be loaded first
+        bbal = tk.Tk()
+        bbal.title('Change Bank Balance')
+        bbal.resizable(0,0) # Make the frame not resizable
+        bbal.geometry('600x200')
+        bbalframe = Frame(bbal, width=600, height=200, bg=colortone_bbalance, highlightthickness=0, bd=0)
+        bbalframe.grid(row=0,column=0)
+
+        bankbalancecanvas = Canvas(bbalframe,width=800,borderwidth=0, highlightthickness=0,bg=colortone_bbalance)        
+        bankbalancecanvas.place(relx=0.5, rely=0.5, anchor='center')
+
+        bbal_info = tk.Label(bankbalancecanvas,font=('swos',16),text='WARNING! This is experimental function.\nEnsure you have a savefile backup!',fg='orange',bg=colortone_bbalance)
+        cbb_lab = tk.Label(bankbalancecanvas, font=('swos',13),text='Current Bank Balance:',anchor='c',justify='right',fg='white',bg=colortone_bbalance)
+        nbb_lab = tk.Label(bankbalancecanvas, font=('swos',13),text='ENTER NEW Bank Balance:',anchor='c',justify='right',fg='yellow',bg=colortone_bbalance)
+        bbal_Box1 = tk.Label(bankbalancecanvas,font=('swos',13),text="{:0,.2f}".format(float(carfileteaminfo.money)),fg='white',bg=colortone_bbalance)
+        bbal_Box2 = tk.Entry(bankbalancecanvas,font=('swos',13),justify='right',bg=colortone_bbalance,fg='yellow')
+        dirtybutton = tk.Button(bankbalancecanvas,font=('swos',13),text="SAVE",fg='red',command=change_bbalance_save)
+
+        bbal_info.grid(row=0,column=0,columnspan=2,pady=(10,0))
+        cbb_lab.grid(row=1,column=0,sticky='e',padx=(0, 10),pady=(10,0))
+        nbb_lab.grid(row=2,column=0,sticky='e',padx=(0, 10),pady=(10,0))
+        bbal_Box1.grid(row=1,column=1,pady=(10,0),sticky='e')
+        bbal_Box2.grid(row=2,column=1,pady=(10,0),sticky='e')
+        dirtybutton.grid(row=3,column=1,pady=(10,0))
+        bbal.mainloop()        
+    else:
+        tk.messagebox.showerror(title='Not so fast...',message='Please open a *.CAR file first')
+
+def change_bbalance_save(): # Converts integer value into hex and saves to CAR file
+    nbbvalue = int(bbal_Box2.get())  # Read from entry box
+    if 0 < nbbvalue < 100000000:     # Compare if value sits between 0 and 100m
+        hex_nbbvalue = hex(nbbvalue)
+        hex_nbbvalue = hex_nbbvalue[2:] # drop 0x prefix from hex value
+        hex_nbbvalue = hex_nbbvalue.zfill(8) # ensure hex value has all mandatory 8 signs
+        # Reverse hex value starts below. This is mandatory step to get this data saved under CAR file.
+        # Values in CAR file are calculated the following: 1st pair x 1 | 2nd x 256 | 3rd x 65536 | 4th x 16777216
+        # It's possible to get negative values after reaching beyond point FFFFFF7F which is a line of symmetry (from largest negative)
+        hex_nbbvalue = ''.join([hex_nbbvalue[i:i+2] for i in range(0, len(hex_nbbvalue), 2)][::-1])
+        # Convert to bytes
+        hex_nbbvalue = hex2byte(hex_nbbvalue)
+        # Open CAR read and binary mode
+        with open(pickedfile, 'r+b') as savetocarfile:
+            savetocarfile.seek(ba_ofst) # Switch to Bank Balance Offset
+            savetocarfile.write(hex_nbbvalue) # Enter new Bank Balance        
+        tk.messagebox.showinfo(title='Success',message='Bank Balance is now set to '+bbal_Box2.get()+'\nYou will have to manually reopen CAR file.')
+        bbal.destroy()
+    else:
+        tk.messagebox.showerror(title='Error',message='New Bank Balance must be between 0 and 100,000,000!')
+        bbal.destroy()
+# ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- 
 
 def edit_player():          # This feature is planned for future releases
     pass
@@ -212,7 +272,6 @@ def infobox():
 
 def launchgitsite():
     webbrowser.open(url)
-
 
 # Read config file setup
 cfg = open(configfile, 'r') # Open read-only
@@ -270,7 +329,7 @@ bg_label.place(x=0,y=0)
 #- - - - - - - - - - - - - - - - -
 mf_rightframe = Frame(root, height=850, width=300, bg=colortone, highlightthickness=0,bd=0) # Label with menu
 mf_rightframe.grid(row=1,column=1)
-Button(mf_rightframe, image=b4, borderwidth=0, highlightthickness=0, command=work_in_progress).place(y=400,x=30)
+Button(mf_rightframe, image=b4, borderwidth=0, highlightthickness=0, command=change_bbalance).place(y=400,x=30)
 Button(mf_rightframe, image=b7, borderwidth=0, highlightthickness=0, command=work_in_progress).place(y=450,x=30)
 Button(mf_rightframe, image=b3, borderwidth=0, highlightthickness=0, command=upd_data_teams).place(y=500,x=30)
 Button(mf_rightframe, image=b5, borderwidth=0, highlightthickness=0, command=work_in_progress).place(y=550,x=30)

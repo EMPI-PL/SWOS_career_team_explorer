@@ -40,7 +40,7 @@ class player():
 def readcarfile(inputfile):
     # Actual CAR file HEX reading begins here
     # -----------------------------------------------------------------------------------------------------
-    # Define starting blocks for HEXreading
+    # Define starting blocks for HEXreading    
     tm_ofst = 0xDB85             # Club's name (up to 16 hex blocks)
     mn_ofst = 0xDBA4             # Manager's name (up to 16 hex blocks)
     sq_ofst = 0xDBCC             # Starting address to read current CAR file squad

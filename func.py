@@ -31,6 +31,11 @@ def hex2ascii(hexdata, code='utf-8'):
     tmpdata = bytes.fromhex(hexdata).decode(code)    
     return tmpdata
 
+def hex2byte(hexdata):
+    # This is a build-in function but looks better if used like this
+    tmpdata = bytes.fromhex(hexdata)
+    return tmpdata
+
 def hex2int(hexdata):
     # Converts hex data to decimal
     tmpdata = int(hexdata, 16)
