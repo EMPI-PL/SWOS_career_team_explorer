@@ -22,9 +22,15 @@ def hexpurgezeros(hexdata):
 
 def hexcutzeros(hexdata):
     # Cut off entire string post initial 00 position
-    # NOTE: This will avoid misspelled names in squad
-    tmpdata = hexdata[:hexdata.index('00')]    
-    return tmpdata
+    # New loop includes moving digits in pairs rather than indexing first '00' encoutered
+    # This helps to mitigate managers name taking full 8 bites (max) and also random drops with players ending with P ('50' hex val)    
+    for i in range(0, len(hexdata), 2):
+        marker = hexdata[i:i+2]
+        # Found '00' in hexdata so we return till the marker
+        if marker == '00':
+            return hexdata[:i]
+    # No '00' means return full range
+    return hexdata
     
 def hex2ascii(hexdata, code='utf-8'):
     # Converts hex data into ascii

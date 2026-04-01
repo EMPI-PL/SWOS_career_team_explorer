@@ -1,22 +1,23 @@
 # Changelog
 
-### ver 0.41
-#### Highlights
-* :star2: [NEW] Added ability to change bank balance [#6](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/6)
+### ver 0.42
+* [FIX] Fixed issue where if Manager's name contains 16 characters it would fail to open .CAR file [#16](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/16) (@aerofan)
+* [FIX] Application would throw a bunch of errors if user decided not to open .CAR file [#9](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/9)
+* Code preparation for additional functionalities
 
-#### Other
+---
+
+### ver 0.41
+* :star2: [NEW] Added ability to change bank balance [#6](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/6)
 * [FIX] Spelling error in main screen [#13](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/13) (@Jezza53)
 * other minor changes and optimizations
 
 ---
 
 ### ver 0.40
-#### Highlights
 * :star2: [NEW] Player's individual skills are now displayed [#3](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/3)
 * :star2: [NEW] Basic configuration file is available now under *CARexplorer.conf*
 * :star2: [NEW] Generate XML data from SWOS/DATA directory for future editing
-
-#### Other
 * [NEW] New buttons and options added to GUI  
   Currently mostly inactive due to work in progress
 * [FIX] Opening another file will displays wrong info or leaves previously loaded data [#1](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/1)
@@ -37,7 +38,7 @@
 ---
 
 ### ver 0.30
-* GUI created
+* :star2: [NEW] GUI created
 * Minor bugfixes
 
 ---

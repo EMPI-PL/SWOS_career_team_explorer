@@ -12,7 +12,7 @@ class carteam():
         self.money = money
 
 class player():
-    def __init__(self, face, number, name, nation, position, skills, val):
+    def __init__(self, face, number, name, nation, position, skills, val, hex_address):
         self.face = face
         self.number = number
         self.name = name
@@ -20,6 +20,7 @@ class player():
         self.position = position
         self.skills = skills        # Individual skills replaced with MATRIX of skills
         self.val = val
+        self.hex_address = hex_address
     
     def reset(self):
         self.face = None
@@ -29,6 +30,7 @@ class player():
         self.position = None
         self.skills = None
         self.val = None
+        self.hex_address = None
 
 # Force path to CAR file to be given by the user
 #parser = argparse.ArgumentParser(description='SWOS career team explorer')
@@ -54,7 +56,8 @@ def readcarfile(inputfile):
     #sq_ofst = 0xDBCA       # Starting address to read current CAR file squad
 
     footballer = 0  # Number of squad players read from file    
-    squad = [('head','number','name','pos','nat','P', 'V', 'H', 'T', 'C', 'S' ,'F', 'value')] # Declare a list for future data feed
+    #squad = [('head','number','name','pos','nat','P', 'V', 'H', 'T', 'C', 'S' ,'F', 'value')] # Declare a list for future data feed                            # WYWALIC
+    squad= []                                                           # Declare a squad list
     open_infile = open(inputfile, 'r+b').read()                         # Open file in read/binary mode only 
     #inputfile = open(args.carrer_save_file, 'r+b').read()              # Open file in read/binary mode only
     #outputfile = open('path_to_output_file', 'w')                      # Open file for outputs (write mode)
@@ -101,6 +104,7 @@ def readcarfile(inputfile):
                     d_posfaceval[facepos_val_mod[1]][0],
                     matrix,  
                     hexpure(hexread(open_infile, call+32, 1)),
+                    hex_address=call
                 )
                 add_flag = True
             elif call == 0xDBCC and gk_flag == False:   # If the call is for GK BUT no GK was spotted so far (00 in HEX)
@@ -117,28 +121,27 @@ def readcarfile(inputfile):
                     d_posfaceval[facepos_val_mod[1]][0],
                     matrix,  
                     hexpure(hexread(open_infile, call+32, 1)),
+                    hex_address=call
                 )
                 gk_flag = True  # Mark GK is here. This caused an issue at start of career with numerous slots calling GK (5 slots in HEX with 00 value)
                 add_flag = True
             else:
                 add_flag = False
             if add_flag == True:
-                temptuple=(
-                    str(gostek.face),
-                    str(gostek.number),
-                    str(gostek.name),
-                    str(gostek.position),                    
-                    str(gostek.nation),
-                    str(gostek.skills[0]),
-                    str(gostek.skills[1]),
-                    str(gostek.skills[2]),
-                    str(gostek.skills[3]),
-                    str(gostek.skills[4]),
-                    str(gostek.skills[5]),
-                    str(gostek.skills[6]),
-                    str(gostek.val)
-                )            
-                squad.append(temptuple)
+                tempplaya={
+                    "face": str(gostek.face),
+                    "number": str(gostek.number),
+                    "name": str(gostek.name),
+                    "position": str(gostek.position),                    
+                    "nation": str(gostek.nation),
+                    "s1": str(gostek.skills[0]), "s2": str(gostek.skills[1]),                    
+                    "s3": str(gostek.skills[2]), "s4": str(gostek.skills[3]),
+                    "s5": str(gostek.skills[4]), "s6": str(gostek.skills[5]),                    
+                    "s7": str(gostek.skills[6]),
+                    "val": str(gostek.val),
+                    "hex": str(gostek.hex_address)
+                }            
+                squad.append(tempplaya)
             else:
                 pass
             step += 1

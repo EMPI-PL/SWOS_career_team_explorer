@@ -12,7 +12,7 @@ from get_data import *
 windowH = 900       # window height
 windowW = 1300      # window width
 fontW = 'swos'      # Right now assume font installed in system so just name it
-version = 'version 0.41'
+version = 'version 0.42'
 title = 'SWOS Career Team Explorer'
 url = 'https://github.com/EMPI-PL/SWOS_career_team_explorer'
 colortone = '#000040'
@@ -43,6 +43,8 @@ def opencar():
     clear_frame(mf_leftframe)    
     choosecarfile = openfiledialog(default_opendir,'Select SWOS career file',[('SWOS Career file', '*.CAR')])
     pickedfile = choosecarfile.show()
+    if not pickedfile:        
+        return # Stop here if user chosen cancel option
     carfile_output = readcarfile(pickedfile)  # Call func to read squad details
     updateview(carfile_output)   # Call func to view data
 
@@ -52,6 +54,7 @@ def clear_frame(framename):
 
 def updateview(carfile_output):
     global carfileteaminfo
+    global squad
     squad = carfile_output[0]
     carfileteaminfo = carfile_output[1]
     squadcanvas = Canvas(mf_leftframe,width=680,borderwidth=0, highlightthickness=0,bg=colortone)
@@ -86,46 +89,45 @@ def updateview(carfile_output):
     f_label.grid(row=counter,column=11,sticky='n',pady=3)
     star_label.grid(row=counter,column=12,sticky='n',pady=3)
     
-    counter += 1
     while counter < len(squad):
-        pic_load = Image.open(pythonpath+squad[counter][0])    # Read a "head picture"
+        pic_load = Image.open(pythonpath+squad[counter]['face'])    # Read a "head picture"
         pic_set = ImageTk.PhotoImage(pic_load)
-        star_load = Image.open(pythonpath+d_stars[squad[counter][12]])
+        star_load = Image.open(pythonpath+d_stars[squad[counter]['val']])
         star_set = ImageTk.PhotoImage(star_load)
         head_label = Label(squadcanvas,image=pic_set,bg=color_pl,bd=0)
         head_label.image = pic_set
         star_label = Label(squadcanvas,image=star_set,bg=colortone,bd=0)
         star_label.image = star_set
-        num_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter][1],fg='white')
-        pos_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter][3],fg='white')
-        nat_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter][4],fg='white',padx=10)
+        num_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter]['number'],fg='white')
+        pos_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter]['position'],fg='white')
+        nat_label = Label(squadcanvas,bg=colortone,width=3,height=1,bd=0,highlightthickness=0, font=('swos',16),text=squad[counter]['nation'],fg='white',padx=10)
         # Player's skills columns
-        p_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][5]),fg=d_skillcolor[hex2int(squad[counter][5])])
-        v_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][6]),fg=d_skillcolor[hex2int(squad[counter][6])])
-        h_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][7]),fg=d_skillcolor[hex2int(squad[counter][7])])
-        t_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][8]),fg=d_skillcolor[hex2int(squad[counter][8])])
-        c_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][9]),fg=d_skillcolor[hex2int(squad[counter][9])])
-        s_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][10]),fg=d_skillcolor[hex2int(squad[counter][10])])
-        f_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter][11]),fg=d_skillcolor[hex2int(squad[counter][11])])
+        p_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s1']),fg=d_skillcolor[hex2int(squad[counter]['s1'])])
+        v_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s2']),fg=d_skillcolor[hex2int(squad[counter]['s2'])])
+        h_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s3']),fg=d_skillcolor[hex2int(squad[counter]['s3'])])
+        t_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s4']),fg=d_skillcolor[hex2int(squad[counter]['s4'])])
+        c_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s5']),fg=d_skillcolor[hex2int(squad[counter]['s5'])])
+        s_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s6']),fg=d_skillcolor[hex2int(squad[counter]['s6'])])
+        f_label = Label(squadcanvas,bg=colortone,width=2,height=1,bd=0,highlightthickness=0, font=('swos',16),text=hex2int(squad[counter]['s7']),fg=d_skillcolor[hex2int(squad[counter]['s7'])])
         # Condition for goalkeeper (match case instruction released in Python 3.10)
         if counter<12:
-            match squad[counter][3]:
+            match squad[counter]['position']:
                 case 'G':
-                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
                 case _:
-                    name_label = Label(squadcanvas,bg=color_pl,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_pl,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
         elif counter <17:
-            match squad[counter][3]:
+            match squad[counter]['position']:
                 case 'G':
-                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
                 case _:
-                    name_label = Label(squadcanvas,bg=color_16,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_16,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
         else:
-            match squad[counter][3]:
+            match squad[counter]['position']:
                 case 'G':
-                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_gk,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
                 case _:
-                    name_label = Label(squadcanvas,bg=color_re,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter][2],fg='white', padx=20)
+                    name_label = Label(squadcanvas,bg=color_re,width=20,height=1,bd=0,highlightthickness=0, font=('swos',16),anchor='w',text=squad[counter]['name'],fg='white', padx=20)
         # Put the grid on screen
         head_label.grid(row=counter,column=0,sticky='n',pady=3)
         num_label.grid(row=counter,column=1,sticky='n',pady=3)
@@ -179,7 +181,6 @@ def upd_data_teams():
 
 def upd_data_players():     # This feature is planned for future releases
     pass
-
 
 # Change Bank Balance section
 # ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- 
