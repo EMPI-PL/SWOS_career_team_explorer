@@ -2,7 +2,8 @@
 
 ### ver 0.42
 * [FIX] Fixed issue where if Manager's name contains 16 characters it would fail to open .CAR file [#16](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/16) (@aerofan)
-* [FIX] Application would throw a bunch of errors if user decided not to open .CAR file [#9](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/9)
+* [FIX] Fixed application would throw a bunch of errors if user decided cancel openning of .CAR file [#9](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/9)
+* [FIX] Fixed last letter of that player's name with HEX value ending '0' would crash the app [#11](https://github.com/EMPI-PL/SWOS_career_team_explorer/issues/11) (@jwigert, @Jezza53)
 * Code preparation for additional functionalities
 
 ---
